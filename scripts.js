@@ -32,7 +32,14 @@ let page = 1; // Keep track of the current page
 let matches = books; // Keep track of the matched books
 
 class BookPreview extends HTMLElement {
-
+  // Defined the constructor method to initialize the Web Component
+  constructor() {
+    // Calling the constructor of the superclass (HTMLElement)
+    super();
+    // Creating a shadow root for the Web Component
+    this.attachShadow({ mode: "open" });
+  }
+  
   // It's Called when the element is first added to the DOM
   connectedCallback() {
     this.render();
