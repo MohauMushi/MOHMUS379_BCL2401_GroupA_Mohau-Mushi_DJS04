@@ -31,40 +31,59 @@ const books = bookData.map((book) => new Book(book));
 let page = 1; // Keep track of the current page
 let matches = books; // Keep track of the matched books
 
+/**
+ * A custom HTML element that represents a book preview.
+ * @extends HTMLElement
+ */
 class BookPreview extends HTMLElement {
-  // Defined the constructor method to initialize the Web Component
+  /**
+   * Constructor method to initialize the Web Component.
+   */
   constructor() {
     // Calling the constructor of the superclass (HTMLElement)
     super();
     // Creating a shadow root for the Web Component
     this.attachShadow({ mode: "open" });
   }
-  
-  // It's Called when the element is first added to the DOM
-  connectedCallback() {
-    const author = this.getAttribute('author');
-    const title = this.getAttribute('title');
-    const image = this.getAttribute('image');
-    const id = this.getAttribute('id');
+
+  /**
+   * Called when the element is first added to the DOM.
+   */ connectedCallback() {
+    const author = this.getAttribute("author");
+    const title = this.getAttribute("title");
+    const image = this.getAttribute("image");
+    const id = this.getAttribute("id");
 
     this.render(author, title, image, id);
   }
-  // It's Called when the element is removed from the DOM
+
+  /**
+   * Returns an array of attribute names to monitor for changes.
+   * @returns {string[]} An array of attribute names to monitor.
+   */
   static get observedAttributes() {
     return ["author", "title", "image"];
   }
+
   /**
-   * Called when one of the element's watched attributes change.
-   * 
-   * 
-   * 
+   * Called when one of the element's watched attributes changes.
+   * @param {string} name - The attribute name that changed.
+   * @param {string} oldValue - The old value of the attribute.
+   * @param {string} newValue - The new value of the attribute.
    */
   attributeChangedCallback(name, oldValue, newValue) {
     this.render();
   }
-  
-render(author, title, image, id) {
-  const shadowRootHTML = `
+
+  /**
+   * Renders the book preview element with the provided data.
+   * @param {string} author - The name of the book's author.
+   * @param {string} title - The title of the book.
+   * @param {string} image - The URL of the book's cover image.
+   * @param {string} id - The unique identifier of the book.
+   */
+  render(author, title, image, id) {
+    const shadowRootHTML = `
     <style>
     .preview {
       border-width: 0;
@@ -131,18 +150,27 @@ render(author, title, image, id) {
     </button>
   `;
 
-  this.shadowRoot.innerHTML = shadowRootHTML;
+    this.shadowRoot.innerHTML = shadowRootHTML;
+  }
 }
-}
+// Define the custom element
 customElements.define("book-preview", BookPreview);
 
-// Function to create a book preview element
+/**
+ * Function to create a book preview element.
+ * @param {Object} bookData - An object containing book data.
+ * @param {string} bookData.author - The identifier of the book's author.
+ * @param {string} bookData.id - The unique identifier of the book.
+ * @param {string} bookData.image - The URL of the book's cover image.
+ * @param {string} bookData.title - The title of the book.
+ * @returns {HTMLElement} The created book preview element.
+ */
 function createBookPreview({ author, id, image, title }) {
-  const element = document.createElement('book-preview');
-    element.setAttribute('id', id);
-    element.setAttribute('author', authors.find(a => a.id === author).name);
-    element.setAttribute('title', title);
-    element.setAttribute('image', image);
+  const element = document.createElement("book-preview");
+  element.setAttribute("id", id);
+  element.setAttribute("author", authors.find((a) => a.id === author).name);
+  element.setAttribute("title", title);
+  element.setAttribute("image", image);
 
   return element;
 }
