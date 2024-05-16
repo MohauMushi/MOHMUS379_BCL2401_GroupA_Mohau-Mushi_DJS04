@@ -33,8 +33,25 @@ let matches = books; // Keep track of the matched books
 
 class BookPreview extends HTMLElement {
 
+  // It's Called when the element is first added to the DOM
+  connectedCallback() {
+    this.render();
+  }
+  // It's Called when the element is removed from the DOM
+  static get observedAttributes() {
+    return ["author", "title", "image"];
+  }
+  /**
+   * Called when one of the element's watched attributes change.
+   * 
+   * 
+   * 
+   */
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.render();
+  }
 }
-  customElements.define('book-preview', BookPreview);
+customElements.define("book-preview", BookPreview);
 
 // Function to create a book preview element
 /**
