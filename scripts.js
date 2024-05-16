@@ -137,31 +137,12 @@ render(author, title, image, id) {
 customElements.define("book-preview", BookPreview);
 
 // Function to create a book preview element
-/**
- * Creates a button element representing a book preview.
- *
- * @param {Object} book - The book object containing book details.
- * @param {string} book.author - The ID of the book's author.
- * @param {string} book.id - The unique ID of the book.
- * @param {string} book.image - The URL of the book's cover image.
- * @param {string} book.title - The title of the book.
- * @returns {HTMLButtonElement} The created button element representing the book preview.
- */
 function createBookPreview({ author, id, image, title }) {
-  const element = document.createElement("button");
-  element.classList = "preview";
-  element.setAttribute("data-preview", id);
-
-  // Finding the author name from the authors array
-  const authorName = authors.find((a) => a.id === author).name;
-
-  element.innerHTML = `
-        <img class="preview__image" src="${image}" />
-        <div class="preview__info">
-            <h3 class="preview__title">${title}</h3>
-            <div class="preview__author">${authorName}</div>
-        </div>
-    `;
+  const element = document.createElement('book-preview');
+    element.setAttribute('id', id);
+    element.setAttribute('author', authors.find(a => a.id === author).name);
+    element.setAttribute('title', title);
+    element.setAttribute('image', image);
 
   return element;
 }
