@@ -42,7 +42,12 @@ class BookPreview extends HTMLElement {
   
   // It's Called when the element is first added to the DOM
   connectedCallback() {
-    this.render();
+    const author = this.getAttribute('author');
+    const title = this.getAttribute('title');
+    const image = this.getAttribute('image');
+    const id = this.getAttribute('id');
+
+    this.render(author, title, image, id);
   }
   // It's Called when the element is removed from the DOM
   static get observedAttributes() {
