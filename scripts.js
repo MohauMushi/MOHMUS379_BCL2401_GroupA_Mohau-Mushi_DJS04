@@ -31,6 +31,11 @@ const books = bookData.map((book) => new Book(book));
 let page = 1; // Keep track of the current page
 let matches = books; // Keep track of the matched books
 
+class BookPreview extends HTMLElement {
+
+}
+  customElements.define('book-preview', BookPreview);
+
 // Function to create a book preview element
 /**
  * Creates a button element representing a book preview.
