@@ -153,6 +153,8 @@ class BookPreview extends HTMLElement {
     this.shadowRoot.innerHTML = shadowRootHTML;
   }
 }
+// @MohauMushi
+// Whenever the browser's parser gets to the <book-preview> tag, it will instantiate and apply our class to createBookPreview
 // Define the custom element
 customElements.define("book-preview", BookPreview);
 
@@ -235,7 +237,7 @@ function authorsOptions() {
   // Appending the author options to the author select element
   data.search.authors.appendChild(authorFragment);
 }
-
+// @MohauMushi
 /**
  * Setting up the theme based on the user's preferred color scheme.
  * If the user prefers a dark color scheme, the theme is set to 'night' and the '--color-dark' and '--color-light' CSS variables are updated accordingly.
@@ -260,7 +262,7 @@ function setupTheme() {
 }
 
 /**
- * Updates the "Show more" button text and state based on the remaining number of books to be shown.
+ * Updates the "Show more" button text and state based on the remaining number of books to be shown.@MohauMushi
  * The button text displays the remaining book count, and the button is disabled if there are no more books to show.
  */
 function showMoreButton() {
